@@ -17,7 +17,11 @@ export default {
       default: "1:1"
     },
     focus: String,
-    step: String
+    step: String,
+    output: {
+      type: String,
+      default: 'preview',
+    },
   },
 
   computed: {
@@ -34,8 +38,11 @@ export default {
         .join("/");
     },
     style() {
-      return `padding-top: calc(${this.userRatio}*100%); background-size: cover;
-      background-image: url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=preview)`;
+      return {
+        paddingTop: `calc(${this.userRatio}*100%)`,
+        backgroundSize: 'cover',
+        backgroundImage: `url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=${this.output})`,
+      };
     },
     twicSrc() {
       return { [`data-${this.$twicClass}-src`]: `image:${this.src}` };
