@@ -10,7 +10,10 @@ export default {
     title: String,
     placeholder: {
       type: String,
-      default: "transparent"
+      default: "preview",
+      validator: function (value) {
+        return ['preview', 'meancolor', 'maincolor'].indexOf(value) !== -1
+      }
     },
     ratio: {
       type: String,
@@ -21,11 +24,11 @@ export default {
   },
 
   computed: {
-    pHolder() {
-      return this.placeholder === "preview" ? "transparent" : this.placeholder;
-    },
     apiRatio() {
       return this.ratio.replace("/", ":");
+    },
+    apiOutput() {
+      return this.placeholder;
     },
     paddingRatio() {
       const r = this.ratio.split("/");
@@ -33,7 +36,7 @@ export default {
     },
     style() {
       return `padding-top: ${this.paddingRatio}%; background-size: cover;
-      background-image: url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=preview)`;
+      background-image: url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=${this.apiOutput})`;
     },
     twicSrc() {
       return { [`data-${this.$twicClass}-src`]: `image:${this.src}` };
@@ -53,7 +56,7 @@ export default {
     <img
       :alt="alt"
       :title="title"
-      :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:${pHolder}`"
+      :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:transparent`"
       v-bind="[twicSrc, twicFocus, twicStep]"
     />
   </div>
