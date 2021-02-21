@@ -14,7 +14,7 @@ export default {
     },
     ratio: {
       type: String,
-      default: "1:1"
+      default: "1/1"
     },
     focus: String,
     step: String
@@ -27,14 +27,12 @@ export default {
     apiRatio() {
       return this.ratio.replace("/", ":");
     },
-    userRatio() {
-      return this.ratio
-        .split("/")
-        .reverse()
-        .join("/");
+    paddingRatio() {
+      const r = this.ratio.split("/");
+      return Number.parseFloat(r[1]/r[0] * 100).toFixed(2);
     },
     style() {
-      return `padding-top: calc(${this.userRatio}*100%); background-size: cover;
+      return `padding-top: ${this.paddingRatio}%; background-size: cover;
       background-image: url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=preview)`;
     },
     twicSrc() {
