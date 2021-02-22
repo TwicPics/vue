@@ -17,7 +17,7 @@
       focus="auto"
       width="500"
       height="800"
-      placeholder="preview"
+      placeholder="none"
     />
   </main>
 </template>

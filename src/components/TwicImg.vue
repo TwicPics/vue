@@ -18,7 +18,7 @@ export default {
       type: String,
       default: "preview",
       validator: function (value) {
-        return ['preview', 'meancolor', 'maincolor'].indexOf(value) !== -1;
+        return ["preview", "meancolor", "maincolor", "none"].indexOf(value) !== -1;
       }
     },
     width: {
@@ -74,7 +74,6 @@ export default {
       default: "0ms"
     }
   },
-
   computed: {
     apiRatio() {
       if (this.ratio) {
@@ -86,7 +85,7 @@ export default {
       }
     },
     apiOutput() {
-      return this.placeholder;
+      return (this.placeholder !== "none") ? this.placeholder : false;
     },
     apiFocus() {
       return this.focus;
@@ -102,12 +101,16 @@ export default {
       return Number.parseFloat(r[1]/r[0] * 100).toFixed(2);
     },
     bgStyle() {
-      let params = [];
-      if (this.apiFocus) { params.push({ k: "focus", v: this.apiFocus }); }
-      if (this.apiRatio) { params.push({ k: "cover", v: this.apiRatio }); }
-      if (this.apiOutput) { params.push({ k: "output", v: this.apiOutput }); }
-      const apiParams = params.map(item => `${item.k}=${item.v}`).join("/");
-      return `padding-top: ${this.paddingRatio}%; background-image: url(${this.$domain}${this.src}?twic=v1/${apiParams})`;
+      let styles = [`padding-top: ${this.paddingRatio}%`];
+      if (this.apiOutput) {
+        let params = [];
+        if (this.apiFocus) { params.push({ k: "focus", v: this.apiFocus }); }
+        if (this.apiRatio) { params.push({ k: "cover", v: this.apiRatio }); }
+        if (this.apiOutput) { params.push({ k: "output", v: this.apiOutput }); }
+        const apiParams = params.map(item => `${item.k}=${item.v}`).join("/");
+        styles.push(`background-image: url(${this.$domain}${this.src}?twic=v1/${apiParams})`);
+      }
+      return styles.join(";");
     },
     imgStyle() {
       if (this.transition) {
