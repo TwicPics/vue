@@ -7,7 +7,6 @@ Vue.use(VueTwicpics, {
   domain: "https://f95hx1x1.twic.pics",
   defaultParams: {
     anticipation: 0.5,
-    class: "batman",
     maxDpr: 2,
     step: 100
   }

@@ -11,7 +11,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-plugin-load-script": "^1.3.2",
-    "vue-twicpics": "https://github.com/TwicPics/vue-twicpics"
+    "vue-twicpics": "file:../"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -28,7 +28,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/recommended",
       "eslint:recommended"
     ],
     "parserOptions": {

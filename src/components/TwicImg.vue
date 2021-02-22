@@ -1,42 +1,116 @@
 <script>
 export default {
-  name: "twic-img",
+  name: "TwicImg",
   props: {
     src: {
       type: String,
       required: true
     },
-    alt: String,
-    title: String,
+    alt: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
+    },
     placeholder: {
       type: String,
       default: "preview",
       validator: function (value) {
-        return ['preview', 'meancolor', 'maincolor'].indexOf(value) !== -1
+        return ['preview', 'meancolor', 'maincolor'].indexOf(value) !== -1;
+      }
+    },
+    width: {
+      type: [String, Number],
+      default: 0,
+      validator: function (value) {
+        return /\d+/.test(value);
+      }
+    },
+    height: {
+      type: [String, Number],
+      default: 0,
+      validator: function (value) {
+        return /\d+/.test(value);
       }
     },
     ratio: {
       type: String,
-      default: "1/1"
+      default: "",
+      validator: function (value) {
+        return /\d+\/\d+/.test(value);
+      }
     },
-    focus: String,
-    step: String
+    focus: {
+      type: String,
+      default: ""
+    },
+    step: {
+      type: [String, Number],
+      default: 10,
+      validator: function (value) {
+        return /\d+/.test(value);
+      }
+    },
+    transition: {
+      type: Boolean,
+      default: true
+    },
+    transitionDuration: {
+      type: String,
+      default: "400ms"
+    },
+    transitionTimingFunction: {
+      type: String,
+      default: "ease"
+    },
+    transitionDelay: {
+      type: String,
+      default: "0ms"
+    }
   },
 
   computed: {
     apiRatio() {
-      return this.ratio.replace("/", ":");
+      if (this.ratio) {
+        return this.ratio.replace("/", ":");
+      } else if (this.width && this.height) {
+        return `${this.width}:${this.height}`;
+      } else {
+        return "1:1";
+      }
     },
     apiOutput() {
       return this.placeholder;
     },
+    apiFocus() {
+      return this.focus;
+    },
     paddingRatio() {
-      const r = this.ratio.split("/");
+      let r = [];
+      if (this.ratio) {
+        r = this.ratio.split("/");
+      } else if (this.width && this.height) {
+        r.push(this.width || 1);
+        r.push(this.height || 1);
+      }
       return Number.parseFloat(r[1]/r[0] * 100).toFixed(2);
     },
-    style() {
-      return `padding-top: ${this.paddingRatio}%; background-size: cover;
-      background-image: url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=${this.apiOutput})`;
+    bgStyle() {
+      let params = [];
+      if (this.apiFocus) { params.push({ k: "focus", v: this.apiFocus }); }
+      if (this.apiRatio) { params.push({ k: "cover", v: this.apiRatio }); }
+      if (this.apiOutput) { params.push({ k: "output", v: this.apiOutput }); }
+      const apiParams = params.map(item => `${item.k}=${item.v}`).join("/");
+      return `padding-top: ${this.paddingRatio}%; background-image: url(${this.$domain}${this.src}?twic=v1/${apiParams})`;
+    },
+    imgStyle() {
+      if (this.transition) {
+        return `transition-duration: ${this.transitionDuration}; transition-timing-function: ${this.transitionTimingFunction}; transition-delay: ${this.transitionDelay}`;
+      } else {
+        return "";
+      }
     },
     twicSrc() {
       return { [`data-${this.$twicClass}-src`]: `image:${this.src}` };
@@ -52,13 +126,30 @@ export default {
 </script>
 
 <template>
-  <div class="twic-img" :style="style">
+  <div
+    class="twic-img"
+    :class="{ 'twic-img--fade': transition }"
+    :style="bgStyle"
+  >
     <img
+      :style="imgStyle"
       :alt="alt"
       :title="title"
       :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:transparent`"
+      :width="width"
+      :height="height"
       v-bind="[twicSrc, twicFocus, twicStep]"
-    />
+    >
+    <noscript>
+      <img
+      :style="imgStyle"
+      :alt="alt"
+      :title="title"
+      :src="`${this.$domain}${this.src}?twic=v1/cover=${apiRatio}/resize=${width||1000}`"
+      :width="width"
+      :height="height"
+      >
+    </noscript>
   </div>
 </template>
 
@@ -80,5 +171,15 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.twic-img--fade > img {
+  transition-property: opacity;
+  will-change: opacity;
+  opacity: 0;
+}
+
+.twic-img--fade > img.twic-done {
+  opacity: 1;
 }
 </style>

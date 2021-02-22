@@ -11,10 +11,7 @@ const VueTwicpics = {
     });
 
     Vue.prototype.$domain = options.domain;
-    Vue.prototype.$twicClass =
-      options.defaultParams && options.defaultParams.class
-        ? options.defaultParams.class
-        : "twic";
+    Vue.prototype.$twicClass = "twic";
   }
 };
 
