@@ -4,7 +4,7 @@ import App from "./App.vue";
 import VueTwicpics from "vue-twicpics";
 
 Vue.use(VueTwicpics, {
-  domain: "https://f95hx1x1.twic.pics",
+  domain: "https://demo.twic.pics",
   defaultParams: {
     anticipation: 0.5,
     maxDpr: 2,

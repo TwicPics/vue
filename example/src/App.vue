@@ -1,14 +1,25 @@
 <template>
-  <twic-img
-    alt="caption"
-    title="caption"
-    src="/gallery/IMG_5310.3rsig.JPG"
-    step="100"
-    ratio="16/9"
-    focus="auto"
-    placeholder="preview"
-    :transition="false"
-  />
+  <main>
+    <twic-img
+      src="/football.jpg"
+      step="100"
+    />
+    <twic-img
+      src="/football.jpg"
+      ratio="16/9"
+      step="100"
+      focus="auto"
+      placeholder="meancolor"
+    />
+    <twic-img
+      src="/football.jpg"
+      step="100"
+      focus="auto"
+      width="500"
+      height="800"
+      placeholder="preview"
+    />
+  </main>
 </template>
 
 <script>
@@ -17,4 +28,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body {
+  background-color: #342d4e;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
+.twic-img {
+  align-self: start;
+}
+</style>
