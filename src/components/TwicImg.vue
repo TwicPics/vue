@@ -39,7 +39,11 @@ export default {
       type: String,
       default: "",
       validator: function (value) {
-        return /\d+\/\d+/.test(value);
+        if (value) {
+          return /\d+\/\d+/.test(value);
+        } else {
+          return true;
+        }
       }
     },
     focus: {
