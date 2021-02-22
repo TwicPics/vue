@@ -1,17 +1,20 @@
 {
   "name": "vue-twicpics",
+  "description": "TwicPics components library for Vue.js",
   "version": "0.1.0",
+  "author": "TwicPics",
   "license": "MIT",
-  "main": "./dist/vuetwicpics.common.js",
+  "main": "dist/vuetwicpics.umd.js",
+  "unpkg": "dist/vuetwicpics.umd.min.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "keywords": [
     "vue",
     "vue-component",
     "twicpics",
-    "vue-twicpics"
+    "vue-twicpics",
+    "image"
   ],
   "repository": {
     "type": "git",
@@ -33,11 +36,11 @@
     "vue": "^2.6.11"
   },
   "scripts": {
-    "eslint": "eslint --ext .js,.jsx src",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-lib": "vue-cli-service build --target lib --name vuetwicpics src/main.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "npm run lint"
   },
   "eslintConfig": {
     "root": true,
@@ -52,5 +55,9 @@
       "parser": "babel-eslint"
     },
     "rules": {}
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/TwicPics/vue-twicpics/issues"
+  },
+  "homepage": "https://github.com/TwicPics/vue-twicpics#readme"
 }
