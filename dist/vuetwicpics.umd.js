@@ -3770,7 +3770,7 @@ module.exports =
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("4bad");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".twic-img{position:relative;width:100%;background-size:cover;background-position:50%;background-repeat:no-repeat;padding-top:100%}.twic-img>img{position:absolute;display:block;top:0;left:0;width:100%;height:100%;-o-object-fit:cover;object-fit:cover}", ""]);
+exports.push([module.i, ".twic-img{width:100%;background-size:cover;background-position:50%;background-repeat:no-repeat}.twic-img__img{position:absolute;display:block;top:0;left:0;width:100%;height:100%;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center}", ""]);
 // Exports
 module.exports = exports;
 
@@ -4130,12 +4130,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0b7ffeff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=7802f28d&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",style:(_vm.style)},[_c('img',_vm._b({attrs:{"alt":_vm.alt,"title":_vm.title,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:" + _vm.pHolder)}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false))])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0b7ffeff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=aa8eba26&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",style:(_vm.style)},[_c('img',_vm._b({staticClass:"twic-img__img",attrs:{"alt":_vm.alt,"title":_vm.title,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:" + _vm.pHolder)}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=7802f28d&
+// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=aa8eba26&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -4204,6 +4204,10 @@ function _defineProperty(obj, key, value) {
     output: {
       type: String,
       "default": 'preview'
+    },
+    absolute: {
+      type: Boolean,
+      "default": false
     }
   },
   computed: {
@@ -4218,7 +4222,10 @@ function _defineProperty(obj, key, value) {
     },
     style: function style() {
       return {
-        paddingTop: "calc(".concat(this.userRatio, "*100%)"),
+        position: this.absolute ? 'absolute' : 'relative',
+        width: this.absolute ? '100%' : '',
+        height: this.absolute ? '100%' : '',
+        paddingTop: this.absolute ? '' : "calc(".concat(this.userRatio, "*100%)"),
         backgroundSize: 'cover',
         backgroundImage: "url(".concat(this.$domain).concat(this.src, "?twic=v1/cover=").concat(this.apiRatio, "/output=").concat(this.output, ")")
       };

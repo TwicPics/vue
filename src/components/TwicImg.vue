@@ -22,6 +22,10 @@ export default {
       type: String,
       default: 'preview',
     },
+    absolute: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   computed: {
@@ -39,7 +43,10 @@ export default {
     },
     style() {
       return {
-        paddingTop: `calc(${this.userRatio}*100%)`,
+        position: this.absolute ? 'absolute' : 'relative',
+        width: this.absolute ? '100%' : '',
+        height: this.absolute ? '100%' : '',
+        paddingTop: this.absolute ? '' : `calc(${this.userRatio}*100%)`,
         backgroundSize: 'cover',
         backgroundImage: `url(${this.$domain}${this.src}?twic=v1/cover=${this.apiRatio}/output=${this.output})`,
       };
@@ -60,6 +67,7 @@ export default {
 <template>
   <div class="twic-img" :style="style">
     <img
+      class="twic-img__img"
       :alt="alt"
       :title="title"
       :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:${pHolder}`"
@@ -70,15 +78,13 @@ export default {
 
 <style>
 .twic-img {
-  position: relative;
   width: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 100%;
 }
 
-.twic-img > img {
+.twic-img__img {
   position: absolute;
   display: block;
   top: 0;
@@ -86,5 +92,6 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 </style>
