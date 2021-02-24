@@ -1,9 +1,6 @@
 <template>
   <main>
-    <twic-img
-      src="/football.jpg"
-      step="100"
-    />
+    <twic-img src="/football.jpg" step="100" />
     <twic-img
       src="/football.jpg"
       ratio="16/9"
@@ -23,9 +20,7 @@
 </template>
 
 <script>
-export default {
-  name: "App"
-};
+export default {};
 </script>
 
 <style>
