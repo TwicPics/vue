@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "dist/vuetwicpics.umd.js",
   "unpkg": "dist/vuetwicpics.umd.min.js",
+  "style": "dist/vuetwicpics.css",
   "files": [
     "dist"
   ],
@@ -38,8 +39,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name vuetwicpics src/main.js",
     "lint": "vue-cli-service lint",
+    "build-lib": "vue-cli-service build --target lib --name vuetwicpics src/main.js",
     "test": "npm run lint"
   },
   "eslintConfig": {

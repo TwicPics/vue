@@ -1,6 +1,6 @@
 const Script = {
-  install: function(Vue) {
-    Vue.script = function({ domain, params }) {
+  install: function (Vue) {
+    Vue.script = function ({ domain, params }) {
       const domainUrl = `${domain}/?v1`;
       if (!document.querySelector('script[src="' + domainUrl + '"]')) {
         const el = document.createElement("script");
@@ -23,6 +23,6 @@ const Script = {
         document.head.appendChild(el);
       }
     };
-  }
+  },
 };
 export default Script;
