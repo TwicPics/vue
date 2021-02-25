@@ -76,11 +76,16 @@ export default {
   },
   computed: {
     apiRatio() {
+      // Use `ratio` if provided.
       if (this.ratio) {
         return this.ratio.replace("/", ":");
-      } else if (this.width && this.height) {
+      }
+      // Use `width` and `height` if no `ratio`.
+      else if (this.width && this.height) {
         return `${this.width}:${this.height}`;
-      } else {
+      }
+      // Fallback to square.
+      else {
         return "1:1";
       }
     },
