@@ -147,16 +147,6 @@ export default {
       :height="height"
       v-bind="[twicSrc, twicFocus, twicStep]"
     >
-    <noscript>
-      <img
-      :style="imgStyle"
-      :alt="alt"
-      :title="title"
-      :src="`${this.$domain}${this.src}?twic=v1/cover=${apiRatio}/resize=${width||1000}`"
-      :width="width"
-      :height="height"
-      >
-    </noscript>
   </div>
 </template>
 
