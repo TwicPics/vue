@@ -4134,12 +4134,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e9cb265a-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=81f088b8&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",class:{ 'twic-img--fade': _vm.transition },style:(_vm.bgStyle)},[_c('img',_vm._b({style:(_vm.imgStyle),attrs:{"alt":_vm.alt,"title":_vm.title,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:transparent"),"width":_vm.width,"height":_vm.height}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false)),_c('noscript',[_c('img',{style:(_vm.imgStyle),attrs:{"alt":_vm.alt,"title":_vm.title,"src":("" + (this.$domain) + (this.src) + "?twic=v1/cover=" + _vm.apiRatio + "/resize=" + (_vm.width||1000)),"width":_vm.width,"height":_vm.height}})])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e9cb265a-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=0f1e6ddf&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",class:{ 'twic-img--fade': _vm.transition },style:(_vm.bgStyle)},[_c('img',_vm._b({style:(_vm.imgStyle),attrs:{"alt":_vm.alt,"title":_vm.title,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:transparent"),"width":_vm.width,"height":_vm.height}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=81f088b8&
+// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=0f1e6ddf&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -4279,13 +4279,16 @@ function _defineProperty(obj, key, value) {
   },
   computed: {
     apiRatio: function apiRatio() {
+      // Use `ratio` if provided.
       if (this.ratio) {
         return this.ratio.replace("/", ":");
-      } else if (this.width && this.height) {
-        return "".concat(this.width, ":").concat(this.height);
-      } else {
-        return "1:1";
-      }
+      } // Use `width` and `height` if no `ratio`.
+      else if (this.width && this.height) {
+          return "".concat(this.width, ":").concat(this.height);
+        } // Fallback to square.
+        else {
+            return "1:1";
+          }
     },
     apiOutput: function apiOutput() {
       return this.placeholder !== "none" ? this.placeholder : false;
@@ -4306,7 +4309,7 @@ function _defineProperty(obj, key, value) {
       return Number.parseFloat(r[1] / r[0] * 100).toFixed(2);
     },
     bgStyle: function bgStyle() {
-      var styles = ["padding-top: ".concat(this.paddingRatio, "%")];
+      var styles = ["padding-top: ".concat(this.paddingRatio, "%")]; // Only provide a background image if the user asks for a placeholder.
 
       if (this.apiOutput) {
         var params = [];
@@ -4334,8 +4337,10 @@ function _defineProperty(obj, key, value) {
 
         var apiParams = params.map(function (item) {
           return "".concat(item.k, "=").concat(item.v);
-        }).join("/");
-        styles.push("background-image: url(".concat(this.$domain).concat(this.src, "?twic=v1/").concat(apiParams, ")"));
+        }).join("/"); // Add a slash if needed.
+
+        var path = /^\//.test(this.src) ? this.$domain + this.src : "".concat(this.$domain, "/").concat(this.src);
+        styles.push("background-image: url(".concat(path, "?twic=v1/").concat(apiParams, ")"));
       }
 
       return styles.join(";");
