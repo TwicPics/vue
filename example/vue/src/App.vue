@@ -1,11 +1,11 @@
 <template>
   <main>
     <twic-img
-      src="/football.jpg"
+      src="https://assets.twicpics.com/examples/football.jpg"
       step="100"
     />
     <twic-img
-      src="/football.jpg"
+      src="football.jpg"
       ratio="16/9"
       step="100"
       focus="auto"

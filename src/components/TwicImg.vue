@@ -102,13 +102,16 @@ export default {
     },
     bgStyle() {
       let styles = [`padding-top: ${this.paddingRatio}%`];
+      // Only provide a background image if the user asks for a placeholder.
       if (this.apiOutput) {
         let params = [];
         if (this.apiFocus) { params.push({ k: "focus", v: this.apiFocus }); }
         if (this.apiRatio) { params.push({ k: "cover", v: this.apiRatio }); }
         if (this.apiOutput) { params.push({ k: "output", v: this.apiOutput }); }
         const apiParams = params.map(item => `${item.k}=${item.v}`).join("/");
-        styles.push(`background-image: url(${this.$domain}${this.src}?twic=v1/${apiParams})`);
+        // Add a slash if needed.
+        const path = (/^\//.test(this.src)) ? this.$domain + this.src : `${this.$domain}/${this.src}`;
+        styles.push(`background-image: url(${path}?twic=v1/${apiParams})`);
       }
       return styles.join(";");
     },
