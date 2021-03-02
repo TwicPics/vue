@@ -1,8 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
 
-import VueTwicpics from "vue-twicpics";
-import "vue-twicpics/dist/vuetwicpics.css";
+import VueTwicpics from "@twicpics/vue";
+import "@twicpics/vue/dist/vuetwicpics.css";
 Vue.use(VueTwicpics, {
   domain: "https://demo.twic.pics",
   defaultParams: {

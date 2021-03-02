@@ -1,11 +1,10 @@
 <template>
   <main>
-    <twic-img src="/football.jpg" step="100" />
+    <twic-img src="https://assets.twicpics.com/examples/football.jpg" />
     <twic-img
       src="/football.jpg"
       ratio="16/9"
       step="100"
-      focus="auto"
       placeholder="meancolor"
     />
     <twic-img
@@ -30,8 +29,10 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 1rem;
+  max-width: 1280px;
+  margin: auto;
 }
 
 .twic-img {
