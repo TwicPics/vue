@@ -60,5 +60,8 @@
   "bugs": {
     "url": "https://github.com/TwicPics/vue-twicpics/issues"
   },
-  "homepage": "https://github.com/TwicPics/vue-twicpics#readme"
+  "homepage": "https://github.com/TwicPics/vue-twicpics#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
