@@ -99,7 +99,7 @@ export default {
       let r = [];
       if (this.ratio) {
         r = this.ratio.split("/");
-      } else if (this.width && this.height) {
+      } else {
         r.push(this.width || 1);
         r.push(this.height || 1);
       }
