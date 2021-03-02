@@ -5,8 +5,8 @@
 ## Install
 
 ```bash
-yarn add vue-twicpics
-# or npm install vue-twicpics
+yarn add @twicpics/vue
+# or npm install @twicpics/vue
 ```
 
 ## Quick start
@@ -15,8 +15,8 @@ yarn add vue-twicpics
 
 ```js
 import Vue from "vue";
-import VueTwicpics from "vue-twicpics";
-import "vue-twicpics/dist/vuetwicpics.css";
+import VueTwicpics from "@twicpics/vue";
+import "@twicpics/vue/dist/vuetwicpics.css";
 
 Vue.use(VueTwicpics, {
   domain: "https://sub-domain.twic.pics"
