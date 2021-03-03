@@ -8,7 +8,8 @@
     ".": {
       "import": "./dist/vue-twicpics.es.js",
       "require": "./dist/vue-twicpics.umd.js"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "files": [
     "dist",
