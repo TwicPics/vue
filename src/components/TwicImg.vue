@@ -49,14 +49,14 @@ export default {
         .join("/");
     },
     style() {
-      const { absolute, userRatio, $domain, src, sizeType, apiRatio, output } = this;
+      const { absolute, userRatio, $domain, src, apiRatio, output } = this;
       return {
         position: absolute ? 'absolute' : 'relative',
         width: absolute ? '100%' : '',
         height: absolute ? '100%' : '',
         paddingTop: absolute ? '' : `calc(${userRatio}*100%)`,
         backgroundSize: 'cover',
-        backgroundImage: `url(${$domain}${src}?twic=v1/${sizeType}=${apiRatio}/output=${output})`,
+        backgroundImage: `url(${$domain}${src}?twic=v1/cover=${apiRatio}/output=${output})`,
       };
     },
     twicSrc() {
@@ -67,6 +67,11 @@ export default {
     },
     twicStep() {
       return { [`data-${this.$twicClass}-src-step`]: this.step };
+    },
+    twicTransform() {
+      return {
+        [`data-${this.$twicClass}-src-transform`]: `*`,
+      }
     }
   }
 };
@@ -76,10 +81,14 @@ export default {
   <div class="twic-img" :style="style">
     <img
       class="twic-img__img"
+      :class="{
+        'twic-img__img--cover': sizeType === 'cover',
+        'twic-img__img--contain': sizeType === 'contain',
+      }"
       :alt="alt"
       :title="title"
-      :src="`${this.$domain}/v1/${sizeType}=${apiRatio}/placeholder:${pHolder}`"
-      v-bind="[twicSrc, twicFocus, twicStep]"
+      :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:${pHolder}`"
+      v-bind="[twicSrc, twicFocus, twicStep, twicTransform]"
     />
   </div>
 </template>
@@ -99,7 +108,14 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   object-position: center;
+}
+
+.twic-img__img--cover {
+  object-fit: cover;
+}
+
+.twic-img__img--contain {
+  object-fit: contain;
 }
 </style>
