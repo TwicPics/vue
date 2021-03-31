@@ -1,5 +1,5 @@
 {
-  "name": "vue-twicpics",
+  "name": "@studiometa/vue-twicpics",
   "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/vue-twicpics.umd.js",
