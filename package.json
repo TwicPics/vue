@@ -1,6 +1,6 @@
 {
   "name": "@studiometa/vue-twicpics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -52,6 +52,6 @@
     "fix:scripts": "npm run lint:scripts -- --fix",
     "fix:styles": "npm run lint:styles -- --fix",
     "build": "vite build",
-    "prepublishOnly": "npmm run build"
+    "prepublishOnly": "npm run build"
   }
 }
