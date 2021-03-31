@@ -52,6 +52,6 @@
     "fix:scripts": "npm run lint:scripts -- --fix",
     "fix:styles": "npm run lint:styles -- --fix",
     "build": "vite build",
-    "prepublishOnly": "npmm run build"
+    "prepublishOnly": "npm run build"
   }
 }
