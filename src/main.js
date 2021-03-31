@@ -1,25 +1,16 @@
-import TwicImg from "./components/TwicImg.vue";
-import script from "./utils/script";
+import TwicImg from './components/TwicImg.vue';
+import addScript from './utils/addScript.js';
 
-const VueTwicpics = {
+export default {
   install(Vue, options) {
-    Vue.component("twic-img", TwicImg);
-    Vue.use(script);
-    Vue.script({
+    Vue.component('twic-img', TwicImg);
+    addScript({
       domain: options.domain,
-      params: options.defaultParams
+      params: options.defaultParams,
     });
 
-    Vue.prototype.$domain = options.domain;
+    Vue.prototype.$twicDomain = options.domain;
     Vue.prototype.$twicClass =
-      options.defaultParams && options.defaultParams.class
-        ? options.defaultParams.class
-        : "twic";
-  }
+      options.defaultParams && options.defaultParams.class ? options.defaultParams.class : 'twic';
+  },
 };
-
-if (typeof window !== "undefined" && window.Vue) {
-  window.Vue.use(VueTwicpics);
-}
-
-export default VueTwicpics;
