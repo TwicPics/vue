@@ -106,7 +106,8 @@ export default {
       return Number.parseFloat(r[1]/r[0] * 100).toFixed(2);
     },
     bgStyle() {
-      let styles = [`padding-top: ${this.paddingRatio}%`];
+      const styles = {}
+      styles.paddingTop = `${this.paddingRatio}%`;
       // Only provide a background image if the user asks for a placeholder.
       if (this.apiOutput) {
         let params = [];
@@ -116,15 +117,19 @@ export default {
         const apiParams = params.map(item => `${item.k}=${item.v}`).join("/");
         // Add a slash if needed.
         const path = (/^\//.test(this.src)) ? this.$domain + this.src : `${this.$domain}/${this.src}`;
-        styles.push(`background-image: url(${path}?twic=v1/${apiParams})`);
+        styles.backgroundImage = `url(${path}?twic=v1/${apiParams})`;
       }
-      return styles.join(";");
+      return styles;
     },
     imgStyle() {
       if (this.transition) {
-        return `transition-duration: ${this.transitionDuration}; transition-timing-function: ${this.transitionTimingFunction}; transition-delay: ${this.transitionDelay}`;
+        return {
+          transitionDuration: this.transitionDuration,
+          transitionTimingFunction : this.transitionTimingFunction,
+          transitionDelay: this.transitionDelay
+        }
       } else {
-        return "";
+        return {};
       }
     },
     twicSrc() {
