@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/TwicPics/vue-twicpics.git"
+    "url": "git://github.com/TwicPics/vue.git"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -58,9 +58,9 @@
     "rules": {}
   },
   "bugs": {
-    "url": "https://github.com/TwicPics/vue-twicpics/issues"
+    "url": "https://github.com/TwicPics/vue/issues"
   },
-  "homepage": "https://github.com/TwicPics/vue-twicpics#readme",
+  "homepage": "https://github.com/TwicPics/vue#readme",
   "publishConfig": {
     "access": "public"
   }
