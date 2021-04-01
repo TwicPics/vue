@@ -8,11 +8,7 @@ export default {
     },
     alt: {
       type: String,
-      default: ""
-    },
-    title: {
-      type: String,
-      default: ""
+      default: undefined
     },
     placeholder: {
       type: String,
@@ -23,14 +19,14 @@ export default {
     },
     width: {
       type: [String, Number],
-      default: 0,
+      default: undefined,
       validator: function (value) {
         return /\d+/.test(value);
       }
     },
     height: {
       type: [String, Number],
-      default: 0,
+      default: undefined,
       validator: function (value) {
         return /\d+/.test(value);
       }
@@ -155,8 +151,8 @@ export default {
       :style="imgStyle"
       :alt="alt === undefined ? src.split(/[?#]/).shift().split('/').pop().split('.').shift() : alt"
       :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:transparent`"
-      :width="width"
-      :height="height"
+      :width="width || false"
+      :height="height || false"
       v-bind="[twicSrc, twicFocus, twicStep]"
     >
   </div>
