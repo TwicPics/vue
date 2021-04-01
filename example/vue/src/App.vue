@@ -9,6 +9,7 @@
     />
     <twic-img
       src="/football.jpg"
+      alt="custom alt attribute"
       step="100"
       focus="auto"
       width="500"

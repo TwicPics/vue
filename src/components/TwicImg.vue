@@ -153,8 +153,7 @@ export default {
   >
     <img
       :style="imgStyle"
-      :alt="alt"
-      :title="title"
+      :alt="alt === undefined ? src.split(/[?#]/).shift().split('/').pop().split('.').shift() : alt"
       :src="`${this.$domain}/v1/cover=${apiRatio}/placeholder:transparent`"
       :width="width"
       :height="height"

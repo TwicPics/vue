@@ -86,6 +86,7 @@ To avoid requesting too may variants of the same image, TwicPics will round the 
 | `transitionDuration` | Duration of the transition effect. | `String` | `400ms` | `false` |
 | `transitionTimingFunction` | CSS timing function applied to the transition effect. | `String` | `ease` | `false` |
 | `transitionDelay` | Transition delay of the transition effect. | `String` | `0ms` | `false` |
+| `alt` | Alt attribute content | `String` | Image name without extention | `false` |
 
 ### Example
 
