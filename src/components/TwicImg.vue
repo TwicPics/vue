@@ -18,7 +18,7 @@ export default {
       type: String,
       default: "preview",
       validator: function (value) {
-        return ["preview", "meancolor", "maincolor", "none"].indexOf(value) !== -1;
+        return ["preview", "meancolor", "maincolor", "none"].includes(value);
       }
     },
     width: {
