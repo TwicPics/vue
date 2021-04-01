@@ -49,7 +49,7 @@
 
     computed: {
       pHolder() {
-        return this.placeholder === 'preview' ? 'transparent' : this.placeholder;
+        return ['none', 'preview'].includes(this.placeholder) ? 'transparent' : this.placeholder;
       },
       apiRatio() {
         return this.ratio.replace('/', ':');
@@ -67,7 +67,7 @@
           height: absolute ? '100%' : '',
           paddingTop: absolute ? '' : `calc(${userRatio}*100%)`,
           backgroundSize: 'cover',
-          backgroundImage: `url(${$twicDomain}${src}?twic=v1/cover=${apiRatio}/output=${output})`,
+          backgroundImage: this.placeholder === 'none' ? '' : `url(${$twicDomain}${src}?twic=v1/cover=${apiRatio}/output=${output})`,
         };
       },
       twicSrc() {
