@@ -3375,36 +3375,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "c975":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var $indexOf = __webpack_require__("4d64").indexOf;
-var arrayMethodIsStrict = __webpack_require__("a640");
-var arrayMethodUsesToLength = __webpack_require__("ae40");
-
-var nativeIndexOf = [].indexOf;
-
-var NEGATIVE_ZERO = !!nativeIndexOf && 1 / [1].indexOf(1, -0) < 0;
-var STRICT_METHOD = arrayMethodIsStrict('indexOf');
-var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
-
-// `Array.prototype.indexOf` method
-// https://tc39.es/ecma262/#sec-array.prototype.indexof
-$({ target: 'Array', proto: true, forced: NEGATIVE_ZERO || !STRICT_METHOD || !USES_TO_LENGTH }, {
-  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
-    return NEGATIVE_ZERO
-      // convert -0 to +0
-      ? nativeIndexOf.apply(this, arguments) || 0
-      : $indexOf(this, searchElement, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-
-/***/ }),
-
 /***/ "ca84":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3425,6 +3395,32 @@ module.exports = function (object, names) {
   }
   return result;
 };
+
+
+/***/ }),
+
+/***/ "caad":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var $includes = __webpack_require__("4d64").includes;
+var addToUnscopables = __webpack_require__("44d2");
+var arrayMethodUsesToLength = __webpack_require__("ae40");
+
+var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
+
+// `Array.prototype.includes` method
+// https://tc39.es/ecma262/#sec-array.prototype.includes
+$({ target: 'Array', proto: true, forced: !USES_TO_LENGTH }, {
+  includes: function includes(el /* , fromIndex = 0 */) {
+    return $includes(this, el, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables('includes');
 
 
 /***/ }),
@@ -4134,18 +4130,18 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e9cb265a-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=63312094&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",class:{ 'twic-img--fade': _vm.transition },style:(_vm.bgStyle)},[_c('img',_vm._b({style:(_vm.imgStyle),attrs:{"alt":_vm.alt,"title":_vm.title,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:transparent"),"width":_vm.width,"height":_vm.height}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false))])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e9cb265a-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader/lib??vue-loader-options!./src/components/TwicImg.vue?vue&type=template&id=2c07aa81&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"twic-img",class:{ 'twic-img--fade': _vm.transition },style:(_vm.bgStyle)},[_c('img',_vm._b({style:(_vm.imgStyle),attrs:{"alt":_vm.alt === undefined ? _vm.src.split(/[?#]/).shift().split('/').pop().split('.').shift() : _vm.alt,"src":((this.$domain) + "/v1/cover=" + _vm.apiRatio + "/placeholder:transparent"),"width":_vm.width || false,"height":_vm.height || false}},'img',[_vm.twicSrc, _vm.twicFocus, _vm.twicStep],false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=63312094&
+// CONCATENATED MODULE: ./src/components/TwicImg.vue?vue&type=template&id=2c07aa81&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
-var es_array_index_of = __webpack_require__("c975");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
+var es_array_includes = __webpack_require__("caad");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
 var es_array_join = __webpack_require__("a15b");
@@ -4211,29 +4207,25 @@ function _defineProperty(obj, key, value) {
     },
     alt: {
       type: String,
-      "default": ""
-    },
-    title: {
-      type: String,
-      "default": ""
+      "default": undefined
     },
     placeholder: {
       type: String,
       "default": "preview",
       validator: function validator(value) {
-        return ["preview", "meancolor", "maincolor", "none"].indexOf(value) !== -1;
+        return ["preview", "meancolor", "maincolor", "none"].includes(value);
       }
     },
     width: {
       type: [String, Number],
-      "default": 0,
+      "default": undefined,
       validator: function validator(value) {
         return /\d+/.test(value);
       }
     },
     height: {
       type: [String, Number],
-      "default": 0,
+      "default": undefined,
       validator: function validator(value) {
         return /\d+/.test(value);
       }
@@ -4309,7 +4301,8 @@ function _defineProperty(obj, key, value) {
       return Number.parseFloat(r[1] / r[0] * 100).toFixed(2);
     },
     bgStyle: function bgStyle() {
-      var styles = ["padding-top: ".concat(this.paddingRatio, "%")]; // Only provide a background image if the user asks for a placeholder.
+      var styles = {};
+      styles.paddingTop = "".concat(this.paddingRatio, "%"); // Only provide a background image if the user asks for a placeholder.
 
       if (this.apiOutput) {
         var params = [];
@@ -4340,16 +4333,20 @@ function _defineProperty(obj, key, value) {
         }).join("/"); // Add a slash if needed.
 
         var path = /^\//.test(this.src) ? this.$domain + this.src : "".concat(this.$domain, "/").concat(this.src);
-        styles.push("background-image: url(".concat(path, "?twic=v1/").concat(apiParams, ")"));
+        styles.backgroundImage = "url(".concat(path, "?twic=v1/").concat(apiParams, ")");
       }
 
-      return styles.join(";");
+      return styles;
     },
     imgStyle: function imgStyle() {
       if (this.transition) {
-        return "transition-duration: ".concat(this.transitionDuration, "; transition-timing-function: ").concat(this.transitionTimingFunction, "; transition-delay: ").concat(this.transitionDelay);
+        return {
+          transitionDuration: this.transitionDuration,
+          transitionTimingFunction: this.transitionTimingFunction,
+          transitionDelay: this.transitionDelay
+        };
       } else {
-        return "";
+        return {};
       }
     },
     twicSrc: function twicSrc() {
